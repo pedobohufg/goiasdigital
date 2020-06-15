@@ -5,7 +5,6 @@ let camera;
 let renderer;
 let scene;
 let house;
-let controls;
 
 function init() {
   container = document.querySelector(".scene");
@@ -13,11 +12,14 @@ function init() {
   //Create scene
   scene = new THREE.Scene();
 
-  camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 100 );
+  const fov = 35;
+  const aspect = container.clientWidth / container.clientHeight;
+  const near = 0.1;
+  const far = 1000;
 
-  controls = new OrbitControls( camera, renderer.domElement );
-  camera.position.set( 0, 20, 100 );
-  controls.update();
+  //Camera setup
+  camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.set(0, 5, 30);
 
   const ambient = new THREE.AmbientLight(0x404040, 2);
   scene.add(ambient);
